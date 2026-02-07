@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MONOCHRA Admin</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">MONOCHRA</div>
+                <div style="font-size: 10px; color: var(--grey-500); margin-top: 5px; letter-spacing: 2px;">
+                    ADMIN PANEL
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-item active">
+                        <i class="fas fa-chart-line"></i>
+                        Dashboard
+                    </a>
+                    <a href="statistics.html" class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        Statistics
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <a href="products.html" class="nav-item">
+                        <i class="fas fa-box"></i>
+                        Products
+                    </a>
+                    <a href="stock.html" class="nav-item">
+                        <i class="fas fa-warehouse"></i>
+                        Stock Management
+                    </a>
+                    <a href="orders.html" class="nav-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        Orders
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-users"></i>
+                        Customers
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Settings</div>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1 class="page-title">Dashboard</h1>
+                <div class="admin-user">
+                    <span style="font-size: 13px; letter-spacing: 0.5px;">Admin User</span>
+                    <div class="user-avatar">AU</div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Total Revenue</div>
+                        </div>
+                        <div class="stat-icon" style="background-color: #000; color: #fff;">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">$45,231</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12.5% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Total Orders</div>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">342</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+8.2% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Total Customers</div>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">1,247</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+15.3% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Products</div>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>-2 from last month</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="admin-grid-2">
+                <div class="chart-container">
+                    <h3 class="card-title">Sales Overview</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="card-title">Category Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="data-card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Orders</h3>
+                    <div class="card-actions">
+                        <a href="orders.html" style="font-size: 12px; letter-spacing: 1px;">View All →</a>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ORD-2451</td>
+                                <td>Sarah Johnson</td>
+                                <td>Feb 07, 2026</td>
+                                <td>$189.00</td>
+                                <td><span class="status-badge processing">Processing</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-2450</td>
+                                <td>Michael Chen</td>
+                                <td>Feb 07, 2026</td>
+                                <td>$524.00</td>
+                                <td><span class="status-badge shipped">Shipped</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-2449</td>
+                                <td>Emma Wilson</td>
+                                <td>Feb 06, 2026</td>
+                                <td>$299.00</td>
+                                <td><span class="status-badge delivered">Delivered</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-2448</td>
+                                <td>David Brown</td>
+                                <td>Feb 06, 2026</td>
+                                <td>$89.00</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-2447</td>
+                                <td>Lisa Anderson</td>
+                                <td>Feb 05, 2026</td>
+                                <td>$445.00</td>
+                                <td><span class="status-badge delivered">Delivered</span></td>
+                                <td>
+                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Low Stock Alert -->
+            <div class="data-card">
+                <div class="card-header">
+                    <h3 class="card-title">Low Stock Alert</h3>
+                    <div class="card-actions">
+                        <a href="stock.html" style="font-size: 12px; letter-spacing: 1px;">Manage Stock →</a>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>SKU</th>
+                                <th>Category</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Minimalist Wool Coat</td>
+                                <td>MWC-001-BLK-M</td>
+                                <td>Clothing</td>
+                                <td>
+                                    <div class="stock-level">
+                                        <div class="stock-bar">
+                                            <div class="stock-fill critical" style="width: 15%;"></div>
+                                        </div>
+                                        <span style="font-size: 12px;">3/20</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge low-stock">Low Stock</span></td>
+                                <td>
+                                    <button class="btn btn-sm">Reorder</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Leather Chelsea Boots</td>
+                                <td>LCB-002-BLK-8</td>
+                                <td>Shoes</td>
+                                <td>
+                                    <div class="stock-level">
+                                        <div class="stock-bar">
+                                            <div class="stock-fill low" style="width: 30%;"></div>
+                                        </div>
+                                        <span style="font-size: 12px;">6/20</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge low-stock">Low Stock</span></td>
+                                <td>
+                                    <button class="btn btn-sm">Reorder</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hydrating Face Serum</td>
+                                <td>HFS-003-50ML</td>
+                                <td>Skincare</td>
+                                <td>
+                                    <div class="stock-level">
+                                        <div class="stock-bar">
+                                            <div class="stock-fill critical" style="width: 0%;"></div>
+                                        </div>
+                                        <span style="font-size: 12px;">0/50</span>
+                                    </div>
+                                </td>
+                                <td><span class="status-badge out-of-stock">Out of Stock</span></td>
+                                <td>
+                                    <button class="btn btn-sm">Reorder</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sales Chart
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 32000, 38000, 42000, 45231],
+                    borderColor: '#000000',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Category Chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Clothing', 'Shoes', 'Beauty', 'Skincare', 'Accessories'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5],
+                    backgroundColor: [
+                        '#000000',
+                        '#424242',
+                        '#757575',
+                        '#9e9e9e',
+                        '#e0e0e0'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>
