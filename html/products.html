@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Bag - MONOCHRA</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cart-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .cart-items {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 20px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .item-image {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .item-details h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .item-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .item-price {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .mini-quantity {
+            display: flex;
+            border: 1px solid var(--border-color);
+        }
+
+        .mini-quantity button {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mini-quantity span {
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .remove-btn:hover {
+            color: var(--black);
+        }
+
+        .order-summary {
+            background-color: var(--grey-50);
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: 15px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .promo-code {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .promo-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .promo-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 12px;
+        }
+
+        .promo-input button {
+            padding: 10px 20px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-cart i {
+            font-size: 64px;
+            color: var(--grey-400);
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .cart-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .item-controls {
+                grid-column: 2;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="top-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><a href="#">Free Shipping on Orders Over $100</a></div>
+                <div>
+                    <a href="#">Help</a>
+                    <a href="#">Track Order</a>
+                    <a href="#">Sign In</a>
+                    <a href="#">Join</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo">MONOCHRA</a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-icons">
+                    <a href="#" class="icon-link"><i class="far fa-user"></i></a>
+                    <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+                    <a href="cart.html" class="icon-link">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="#" class="nav-link">New In</a>
+                <a href="#" class="nav-link">Women</a>
+                <a href="#" class="nav-link">Men</a>
+                <a href="#" class="nav-link">Beauty</a>
+                <a href="#" class="nav-link">Skincare</a>
+                <a href="#" class="nav-link">Shoes</a>
+                <a href="#" class="nav-link">Accessories</a>
+                <a href="#" class="nav-link">Sale</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <div class="container">
+        <div style="margin-top: 40px;">
+            <h1 style="font-size: 28px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">
+                Shopping Bag (2)
+            </h1>
+        </div>
+
+        <div class="cart-wrapper">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                <!-- Cart Item 1 -->
+                <div class="cart-item">
+                    <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=120&h=160&fit=crop" 
+                         alt="Product" class="item-image">
+                    
+                    <div class="item-details">
+                        <h3>Minimalist Wool Coat</h3>
+                        <div class="item-meta">
+                            Color: Black | Size: M
+                        </div>
+                        <div class="item-price">$189.00</div>
+                    </div>
+
+                    <div class="item-controls">
+                        <div class="mini-quantity">
+                            <button onclick="updateQuantity(this, -1)">−</button>
+                            <span>1</span>
+                            <button onclick="updateQuantity(this, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(this)">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cart Item 2 -->
+                <div class="cart-item">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=120&h=160&fit=crop" 
+                         alt="Product" class="item-image">
+                    
+                    <div class="item-details">
+                        <h3>Leather Chelsea Boots</h3>
+                        <div class="item-meta">
+                            Color: Black | Size: 8
+                        </div>
+                        <div class="item-price">$299.00</div>
+                    </div>
+
+                    <div class="item-controls">
+                        <div class="mini-quantity">
+                            <button onclick="updateQuantity(this, -1)">−</button>
+                            <span>1</span>
+                            <button onclick="updateQuantity(this, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(this)">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2 class="summary-title">Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>$488.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span>$39.04</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>$527.04</span>
+                </div>
+
+                <div class="promo-code">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500;">
+                        Promo Code
+                    </div>
+                    <div class="promo-input">
+                        <input type="text" placeholder="Enter code">
+                        <button>Apply</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block checkout-btn">Proceed to Checkout</button>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="index.html" style="font-size: 12px; text-decoration: underline; color: var(--text-secondary);">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h5>Shop</h5>
+                    <ul>
+                        <li><a href="#">New In</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Beauty</a></li>
+                        <li><a href="#">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Help</h5>
+                    <ul>
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MONOCHRA. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateQuantity(btn, change) {
+            const quantitySpan = btn.parentElement.querySelector('span');
+            let quantity = parseInt(quantitySpan.textContent);
+            quantity = Math.max(1, quantity + change);
+            quantitySpan.textContent = quantity;
+            updateTotal();
+        }
+
+        function removeItem(btn) {
+            const cartItem = btn.closest('.cart-item');
+            cartItem.remove();
+            updateTotal();
+            updateCartCount();
+        }
+
+        function updateTotal() {
+            // Calculate total logic here
+            console.log('Total updated');
+        }
+
+        function updateCartCount() {
+            const itemCount = document.querySelectorAll('.cart-item').length;
+            document.querySelector('.cart-badge').textContent = itemCount;
+            document.querySelector('h1').textContent = `Shopping Bag (${itemCount})`;
+        }
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
