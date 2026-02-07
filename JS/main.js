@@ -489,6 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Export for use in other scripts
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { MONOCHRA, ProductDetail, Cart };
 }
