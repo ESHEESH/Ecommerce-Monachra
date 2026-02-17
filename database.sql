@@ -1,10 +1,7 @@
--- MONOCHRA E-Commerce Database Schema
--- MySQL 5.7+
 
 CREATE DATABASE IF NOT EXISTS monochra_db;
 USE monochra_db;
 
--- Users Table
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -17,7 +14,6 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Categories Table
 CREATE TABLE categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -26,7 +22,6 @@ CREATE TABLE categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Products Table
 CREATE TABLE products (
     id INT PRIMARY KEY AUTO_INCREMENT,
     category_id INT NOT NULL,
@@ -45,7 +40,6 @@ CREATE TABLE products (
     INDEX idx_active (is_active)
 );
 
--- Product Images Table
 CREATE TABLE product_images (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -56,7 +50,6 @@ CREATE TABLE product_images (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
--- Cart Table
 CREATE TABLE cart (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -67,7 +60,6 @@ CREATE TABLE cart (
     UNIQUE KEY unique_user_cart (user_id)
 );
 
--- Cart Items Table
 CREATE TABLE cart_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     cart_id INT NOT NULL,
@@ -80,7 +72,6 @@ CREATE TABLE cart_items (
     UNIQUE KEY unique_cart_product (cart_id, product_id)
 );
 
--- Orders Table
 CREATE TABLE orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -101,7 +92,6 @@ CREATE TABLE orders (
     INDEX idx_user (user_id)
 );
 
--- Order Items Table
 CREATE TABLE order_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT NOT NULL,
@@ -113,7 +103,6 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
 );
 
--- Stock Movements Table
 CREATE TABLE stock_movements (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -127,7 +116,6 @@ CREATE TABLE stock_movements (
     INDEX idx_date (created_at)
 );
 
--- Reviews Table
 CREATE TABLE reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -141,7 +129,6 @@ CREATE TABLE reviews (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Wishlist Table
 CREATE TABLE wishlist (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
@@ -152,11 +139,9 @@ CREATE TABLE wishlist (
     UNIQUE KEY unique_wishlist (user_id, product_id)
 );
 
--- Insert Default Admin User (password: admin123)
 INSERT INTO users (email, password, first_name, last_name, is_admin) 
 VALUES ('admin@monochra.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'User', TRUE);
 
--- Insert Sample Categories
 INSERT INTO categories (name, slug, description) VALUES
 ('Clothing', 'clothing', 'Fashion apparel and outfits'),
 ('Shoes', 'shoes', 'Footwear collection'),
@@ -165,7 +150,6 @@ INSERT INTO categories (name, slug, description) VALUES
 ('Accessories', 'accessories', 'Jewelry and accessories'),
 ('Bags', 'bags', 'Handbags and luggage');
 
--- Insert Sample Products
 INSERT INTO products (category_id, name, slug, description, price, sku, quantity, image_url, is_active) VALUES
 (1, 'Minimalist Wool Coat', 'minimalist-wool-coat', 'Classic oversized silhouette', 189.00, 'PRD-001', 15, 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop', TRUE),
 (3, 'Matte Liquid Lipstick', 'matte-liquid-lipstick', 'Long-lasting formula', 24.00, 'PRD-002', 50, 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=500&fit=crop', TRUE),

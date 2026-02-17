@@ -189,8 +189,8 @@
                                 <td>$189.00</td>
                                 <td><span class="status-badge processing">Processing</span></td>
                                 <td>
-                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="viewOrder('ORD-2451')"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" onclick="editOrder('ORD-2451')"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -200,8 +200,8 @@
                                 <td>$524.00</td>
                                 <td><span class="status-badge shipped">Shipped</span></td>
                                 <td>
-                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="viewOrder('ORD-2450')"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" onclick="editOrder('ORD-2450')"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -211,8 +211,8 @@
                                 <td>$299.00</td>
                                 <td><span class="status-badge delivered">Delivered</span></td>
                                 <td>
-                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="viewOrder('ORD-2449')"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" onclick="editOrder('ORD-2449')"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -222,8 +222,8 @@
                                 <td>$89.00</td>
                                 <td><span class="status-badge pending">Pending</span></td>
                                 <td>
-                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="viewOrder('ORD-2448')"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" onclick="editOrder('ORD-2448')"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                             <tr>
@@ -233,8 +233,8 @@
                                 <td>$445.00</td>
                                 <td><span class="status-badge delivered">Delivered</span></td>
                                 <td>
-                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" onclick="viewOrder('ORD-2447')"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon" onclick="editOrder('ORD-2447')"><i class="fas fa-edit"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -387,6 +387,10 @@
             }
         });
     </script>
-    <script src="../js/admin.js"></script>
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/admin.module.js"></script>
+    <script src="../JS/pages/dashboard.js"></script>
 </body>
 </html>

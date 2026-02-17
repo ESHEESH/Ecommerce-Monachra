@@ -145,8 +145,8 @@
             <!-- Filter Bar -->
             <div class="filter-bar">
                 <div class="filter-item">
-                    <select class="form-select">
-                        <option>All Categories</option>
+                    <select class="form-select" id="categoryFilter">
+                        <option value="">All Categories</option>
                         <option>Clothing</option>
                         <option>Shoes</option>
                         <option>Beauty</option>
@@ -155,15 +155,15 @@
                     </select>
                 </div>
                 <div class="filter-item">
-                    <select class="form-select">
-                        <option>All Status</option>
-                        <option>In Stock</option>
-                        <option>Low Stock</option>
-                        <option>Out of Stock</option>
+                    <select class="form-select" id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="in-stock">In Stock</option>
+                        <option value="low-stock">Low Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
                     </select>
                 </div>
                 <div class="filter-item">
-                    <input type="text" class="form-control" placeholder="Search products...">
+                    <input type="text" class="form-control" id="searchStock" placeholder="Search products...">
                 </div>
             </div>
 
@@ -190,166 +190,11 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="stockTableBody">
                             <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Minimalist Wool Coat</span>
-                                    </div>
-                                </td>
-                                <td>MWC-001-BLK-M</td>
-                                <td>Clothing</td>
-                                <td>$189.00</td>
-                                <td>3</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill critical" style="width: 15%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">15%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge low-stock">Low Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Matte Liquid Lipstick</span>
-                                    </div>
-                                </td>
-                                <td>MLL-004-RED</td>
-                                <td>Beauty</td>
-                                <td>$24.00</td>
-                                <td>45</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill" style="width: 90%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">90%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge active">In Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Leather Chelsea Boots</span>
-                                    </div>
-                                </td>
-                                <td>LCB-002-BLK-8</td>
-                                <td>Shoes</td>
-                                <td>$299.00</td>
-                                <td>6</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill low" style="width: 30%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">30%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge low-stock">Low Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Hydrating Face Serum</span>
-                                    </div>
-                                </td>
-                                <td>HFS-003-50ML</td>
-                                <td>Skincare</td>
-                                <td>$45.00</td>
-                                <td>0</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill critical" style="width: 0%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">0%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge out-of-stock">Out of Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Structured Blazer</span>
-                                    </div>
-                                </td>
-                                <td>STB-005-BLK-M</td>
-                                <td>Clothing</td>
-                                <td>$169.00</td>
-                                <td>18</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill" style="width: 72%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">72%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge active">In Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=50&h=50&fit=crop" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
-                                        <span>Minimalist Tote Bag</span>
-                                    </div>
-                                </td>
-                                <td>MTB-006-BLK</td>
-                                <td>Accessories</td>
-                                <td>$129.00</td>
-                                <td>32</td>
-                                <td>
-                                    <div class="stock-level">
-                                        <div class="stock-bar">
-                                            <div class="stock-fill" style="width: 80%;"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">80%</span>
-                                    </div>
-                                </td>
-                                <td><span class="status-badge active">In Stock</span></td>
-                                <td>
-                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon"><i class="fas fa-plus"></i></button>
+                                <td colspan="8" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+                                    <div>Loading inventory...</div>
                                 </td>
                             </tr>
                         </tbody>
@@ -464,6 +309,10 @@
             }
         }
     </script>
-    <script src="../js/admin.js"></script>
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/admin.module.js"></script>
+    <script src="../JS/pages/stock.js"></script>
 </body>
 </html>
