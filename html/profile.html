@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - MONOCHRA</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .profile-sidebar {
+            border-right: 1px solid var(--border-color);
+            padding-right: 30px;
+        }
+
+        .profile-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile-menu li {
+            margin-bottom: 5px;
+        }
+
+        .profile-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: background 0.3s;
+        }
+
+        .profile-menu a:hover,
+        .profile-menu a.active {
+            background: var(--grey-100);
+        }
+
+        .profile-content {
+            padding-left: 20px;
+        }
+
+        .profile-header {
+            margin-bottom: 40px;
+        }
+
+        .profile-header h1 {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .profile-section {
+            display: none;
+        }
+
+        .profile-section.active {
+            display: block;
+        }
+
+        .info-card {
+            background: var(--grey-50);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            font-size: 14px;
+        }
+
+        .order-card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .order-number {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .order-status {
+            padding: 4px 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .order-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .order-status.processing {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .order-status.shipped {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            .profile-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="top-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><a href="#">Free Shipping on Orders Over $100</a></div>
+                <div>
+                    <a href="#">Help</a>
+                    <a href="#" id="logoutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo">MONOCHRA</a>
+                <div class="header-icons">
+                    <a href="profile.html" class="icon-link"><i class="far fa-user"></i></a>
+                    <a href="cart.html" class="icon-link">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Content -->
+    <div class="container">
+        <div class="profile-container">
+            <aside class="profile-sidebar">
+                <ul class="profile-menu">
+                    <li><a href="#" class="menu-link active" data-section="overview">Account Overview</a></li>
+                    <li><a href="#" class="menu-link" data-section="orders">My Orders</a></li>
+                    <li><a href="#" class="menu-link" data-section="details">Account Details</a></li>
+                    <li><a href="#" id="sidebarLogout">Sign Out</a></li>
+                </ul>
+            </aside>
+
+            <main class="profile-content">
+                <!-- Overview Section -->
+                <section id="overview" class="profile-section active">
+                    <div class="profile-header">
+                        <h1>Account Overview</h1>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">
+                            Account Information
+                        </h3>
+                        <div class="info-row">
+                            <span class="info-label">Name</span>
+                            <span class="info-value" id="userName">Loading...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-value" id="userEmail">Loading...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Member Since</span>
+                            <span class="info-value" id="memberSince">Loading...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="profile-section">
+                    <div class="profile-header">
+                        <h1>My Orders</h1>
+                    </div>
+                    <div id="ordersContainer">
+                        <p style="color: var(--text-secondary);">Loading orders...</p>
+                    </div>
+                </section>
+
+                <!-- Account Details Section -->
+                <section id="details" class="profile-section">
+                    <div class="profile-header">
+                        <h1>Account Details</h1>
+                    </div>
+                    <div class="info-card">
+                        <form id="updateProfileForm">
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 8px;">
+                                    First Name
+                                </label>
+                                <input type="text" id="editFirstName" class="form-control" style="width: 100%; padding: 10px; border: 1px solid var(--border-color);">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 8px;">
+                                    Last Name
+                                </label>
+                                <input type="text" id="editLastName" class="form-control" style="width: 100%; padding: 10px; border: 1px solid var(--border-color);">
+                            </div>
+                            <button type="submit" class="btn">Update Profile</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 MONOCHRA. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/main.js"></script>
+    <script>
+        async function loadUserProfile() {
+            try {
+                const response = await fetch('../php/api.php?action=get_user');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const user = data.data;
+                    document.getElementById('userName').textContent = `${user.first_name} ${user.last_name}`;
+                    document.getElementById('userEmail').textContent = user.email;
+                    document.getElementById('memberSince').textContent = new Date(user.created_at).toLocaleDateString();
+                    document.getElementById('editFirstName').value = user.first_name;
+                    document.getElementById('editLastName').value = user.last_name;
+                } else {
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                window.location.href = 'login.html';
+            }
+        }
+
+        async function loadUserOrders() {
+            try {
+                const response = await fetch('../php/api.php?action=get_user_orders');
+                const data = await response.json();
+                
+                const container = document.getElementById('ordersContainer');
+                
+                if (data.success && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(order => `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div>
+                                    <div class="order-number">${order.order_number}</div>
+                                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                        ${new Date(order.created_at).toLocaleDateString()}
+                                    </div>
+                                </div>
+                                <span class="order-status ${order.status}">${order.status}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-size: 13px;">Total: $${parseFloat(order.total).toFixed(2)}</span>
+                                <a href="#" style="font-size: 12px; text-decoration: underline;">View Details</a>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p style="color: var(--text-secondary);">No orders yet</p>';
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = e.target.dataset.section;
+                
+                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                document.querySelectorAll('.profile-section').forEach(s => s.classList.remove('active'));
+                document.getElementById(section).classList.add('active');
+                
+                if (section === 'orders') {
+                    loadUserOrders();
+                }
+            });
+        });
+
+        async function logout() {
+            try {
+                await fetch('../php/api.php?action=logout');
+                window.location.href = 'login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                window.location.href = 'login.html';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+
+        document.getElementById('sidebarLogout').addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserProfile();
+        });
+    </script>
+</body>
+</html>
