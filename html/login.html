@@ -176,8 +176,6 @@
                 <p>Welcome back to MONOCHRA</p>
             </div>
 
-            <div class="error-message" id="errorMessage"></div>
-
             <form id="loginForm">
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -225,51 +223,11 @@
         </div>
     </footer>
 
-    <script src="../JS/main.js"></script>
-    <script>
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const icon = document.getElementById(fieldId + '-eye');
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMsg = document.getElementById('errorMessage');
-            
-            try {
-                const response = await fetch('../php/api.php?action=login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    window.location.href = 'profile.html';
-                } else {
-                    errorMsg.textContent = data.message || 'Login failed';
-                    errorMsg.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                errorMsg.textContent = 'An error occurred. Please try again.';
-                errorMsg.style.display = 'block';
-            }
-        });
-    </script>
+    <!-- Load Modular Scripts -->
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/auth.module.js"></script>
+    <script src="../JS/pages/login.js"></script>
 </body>
 </html>

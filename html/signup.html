@@ -194,9 +194,6 @@
                 <p>Join MONOCHRA today</p>
             </div>
 
-            <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
-
             <form id="signupForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -262,79 +259,11 @@
         </div>
     </footer>
 
-    <script src="../JS/main.js"></script>
-    <script>
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const icon = document.getElementById(fieldId + '-eye');
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const errorMsg = document.getElementById('errorMessage');
-            const successMsg = document.getElementById('successMessage');
-            
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
-            
-            if (password !== confirmPassword) {
-                errorMsg.textContent = 'Passwords do not match';
-                errorMsg.style.display = 'block';
-                return;
-            }
-            
-            if (password.length < 6) {
-                errorMsg.textContent = 'Password must be at least 6 characters';
-                errorMsg.style.display = 'block';
-                return;
-            }
-            
-            try {
-                const response = await fetch('../php/api.php?action=register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email,
-                        password,
-                        first_name: firstName,
-                        last_name: lastName
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    successMsg.textContent = 'Account created successfully! Redirecting to login...';
-                    successMsg.style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 2000);
-                } else {
-                    errorMsg.textContent = data.message || 'Registration failed';
-                    errorMsg.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Signup error:', error);
-                errorMsg.textContent = 'An error occurred. Please try again.';
-                errorMsg.style.display = 'block';
-            }
-        });
-    </script>
+    <!-- Load Modular Scripts -->
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/auth.module.js"></script>
+    <script src="../JS/pages/signup.js"></script>
 </body>
 </html>

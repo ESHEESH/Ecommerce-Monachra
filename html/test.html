@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - MONOCHRA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MONOCHRA - System Test</h1>
+
+    <div class="test-section">
+        <h2>1. Test Modules Loading</h2>
+        <button onclick="testModules()">Test Modules</button>
+        <div id="moduleResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test API Connection</h2>
+        <button onclick="testAPI()">Test API</button>
+        <div id="apiResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test Notifications</h2>
+        <button onclick="Notifications.success('Success test!')">Success</button>
+        <button onclick="Notifications.error('Error test!')">Error</button>
+        <button onclick="Notifications.warning('Warning test!')">Warning</button>
+        <button onclick="Notifications.info('Info test!')">Info</button>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test Registration</h2>
+        <button onclick="testRegister()">Test Register</button>
+        <div id="registerResult" class="result"></div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/auth.module.js"></script>
+
+    <script>
+        function testModules() {
+            const result = document.getElementById('moduleResult');
+            const tests = [];
+            
+            tests.push(`Helpers: ${typeof Helpers !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`API: ${typeof API !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`Notifications: ${typeof Notifications !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`AuthModule: ${typeof AuthModule !== 'undefined' ? '✅' : '❌'}`);
+            
+            result.innerHTML = tests.join('<br>');
+        }
+
+        async function testAPI() {
+            const result = document.getElementById('apiResult');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('../php/api.php?action=get_categories');
+                const data = await response.json();
+                
+                result.innerHTML = `
+                    <strong>API Response:</strong><br>
+                    Success: ${data.success ? '✅' : '❌'}<br>
+                    Data: ${JSON.stringify(data, null, 2)}
+                `;
+            } catch (error) {
+                result.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        async function testRegister() {
+            const result = document.getElementById('registerResult');
+            result.innerHTML = 'Testing registration...';
+            
+            const testUser = {
+                email: 'test' + Date.now() + '@test.com',
+                password: 'test123',
+                first_name: 'Test',
+                last_name: 'User'
+            };
+            
+            try {
+                const response = await API.auth.register(testUser);
+                
+                result.innerHTML = `
+                    <strong>Registration Test:</strong><br>
+                    Success: ${response.success ? '✅' : '❌'}<br>
+                    Message: ${response.message || 'No message'}<br>
+                    Response: ${JSON.stringify(response, null, 2)}
+                `;
+            } catch (error) {
+                result.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        // Auto-run module test on load
+        window.addEventListener('load', () => {
+            testModules();
+        });
+    </script>
+</body>
+</html>

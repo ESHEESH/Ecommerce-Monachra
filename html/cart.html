@@ -399,33 +399,7 @@
         </div>
     </footer>
 
-    <script>
-        function updateQuantity(btn, change) {
-            const quantitySpan = btn.parentElement.querySelector('span');
-            let quantity = parseInt(quantitySpan.textContent);
-            quantity = Math.max(1, quantity + change);
-            quantitySpan.textContent = quantity;
-            updateTotal();
-        }
-
-        function removeItem(btn) {
-            const cartItem = btn.closest('.cart-item');
-            cartItem.remove();
-            updateTotal();
-            updateCartCount();
-        }
-
-        function updateTotal() {
-            // Calculate total logic here
-            console.log('Total updated');
-        }
-
-        function updateCartCount() {
-            const itemCount = document.querySelectorAll('.cart-item').length;
-            document.querySelector('.cart-badge').textContent = itemCount;
-            document.querySelector('h1').textContent = `Shopping Bag (${itemCount})`;
-        }
-    </script>
-    <script src="../js/main.js"></script>
+    <script src="../JS/main.js"></script>
+    <script src="../JS/pages/cart.js"></script>
 </body>
 </html>

@@ -258,102 +258,10 @@
         </div>
     </footer>
 
-    <script src="../JS/main.js"></script>
-    <script>
-        async function loadUserProfile() {
-            try {
-                const response = await fetch('../php/api.php?action=get_user');
-                const data = await response.json();
-                
-                if (data.success && data.data) {
-                    const user = data.data;
-                    document.getElementById('userName').textContent = `${user.first_name} ${user.last_name}`;
-                    document.getElementById('userEmail').textContent = user.email;
-                    document.getElementById('memberSince').textContent = new Date(user.created_at).toLocaleDateString();
-                    document.getElementById('editFirstName').value = user.first_name;
-                    document.getElementById('editLastName').value = user.last_name;
-                } else {
-                    window.location.href = 'login.html';
-                }
-            } catch (error) {
-                console.error('Error loading profile:', error);
-                window.location.href = 'login.html';
-            }
-        }
-
-        async function loadUserOrders() {
-            try {
-                const response = await fetch('../php/api.php?action=get_user_orders');
-                const data = await response.json();
-                
-                const container = document.getElementById('ordersContainer');
-                
-                if (data.success && data.data && data.data.length > 0) {
-                    container.innerHTML = data.data.map(order => `
-                        <div class="order-card">
-                            <div class="order-header">
-                                <div>
-                                    <div class="order-number">${order.order_number}</div>
-                                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
-                                        ${new Date(order.created_at).toLocaleDateString()}
-                                    </div>
-                                </div>
-                                <span class="order-status ${order.status}">${order.status}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <span style="font-size: 13px;">Total: $${parseFloat(order.total).toFixed(2)}</span>
-                                <a href="#" style="font-size: 12px; text-decoration: underline;">View Details</a>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = '<p style="color: var(--text-secondary);">No orders yet</p>';
-                }
-            } catch (error) {
-                console.error('Error loading orders:', error);
-            }
-        }
-
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const section = e.target.dataset.section;
-                
-                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
-                e.target.classList.add('active');
-                
-                document.querySelectorAll('.profile-section').forEach(s => s.classList.remove('active'));
-                document.getElementById(section).classList.add('active');
-                
-                if (section === 'orders') {
-                    loadUserOrders();
-                }
-            });
-        });
-
-        async function logout() {
-            try {
-                await fetch('../php/api.php?action=logout');
-                window.location.href = 'login.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                window.location.href = 'login.html';
-            }
-        }
-
-        document.getElementById('logoutBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            logout();
-        });
-
-        document.getElementById('sidebarLogout').addEventListener('click', (e) => {
-            e.preventDefault();
-            logout();
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadUserProfile();
-        });
-    </script>
+    <script src="../JS/utils/helpers.js"></script>
+    <script src="../JS/utils/api.js"></script>
+    <script src="../JS/utils/notifications.js"></script>
+    <script src="../JS/modules/auth.module.js"></script>
+    <script src="../JS/pages/profile.js"></script>
 </body>
 </html>
